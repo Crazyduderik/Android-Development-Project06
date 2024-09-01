@@ -8,18 +8,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class PokeAdpater(val pokeList: MutableList<String>, val pokeNameList: MutableList<String>,val pokeOrderList: MutableList<Int>) : RecyclerView.Adapter<PokeAdpater.PokeViewHolder>() {
+class PokeAdpater(val pokeList: MutableList<String>, val pokeNameList: MutableList<String>,val pokeOrderList: MutableList<Int>, private val pokeTypeList: MutableList<List<String>>) : RecyclerView.Adapter<PokeAdpater.PokeViewHolder>() {
     class PokeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val pokeImg :ImageView
         lateinit var nameTextView : TextView
         lateinit var orderTextView: TextView
+        lateinit var typeTextView: TextView
 
 
         init{
             pokeImg = view.findViewById(R.id.PokemonImg)
             nameTextView = view.findViewById(R.id.PokemonName)
             orderTextView = view.findViewById(R.id.PokemonNum)
+            typeTextView = view.findViewById(R.id.PokemonType)
 
         }
 
@@ -35,6 +37,7 @@ class PokeAdpater(val pokeList: MutableList<String>, val pokeNameList: MutableLi
 
         holder.orderTextView.text ="ID: " + pokeOrderList[position].toString()
         holder.nameTextView.text = pokeNameList[position]
+        holder.typeTextView.text = "Type " + pokeTypeList[position]
 
 
         Glide.with(holder.itemView)

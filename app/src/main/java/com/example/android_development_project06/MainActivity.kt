@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pokeList: MutableList<String>
     private lateinit var pokeNameList: MutableList<String>
     private lateinit var pokeOrderList: MutableList<Int>
+    private lateinit var pokeTypeList: MutableList<List<String>>
 
     private lateinit var recyclerViewPokemon : RecyclerView
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         pokeList = mutableListOf<String>() // list of pokemon url
         pokeNameList = mutableListOf<String>()
         pokeOrderList = mutableListOf<Int>()
+        pokeTypeList = mutableListOf()
 
 
         getPokemon(1)
@@ -49,17 +51,29 @@ class MainActivity : AppCompatActivity() {
                 val pokeImg = json.jsonObject.getJSONObject("sprites").getString("front_default")
                 val name = json.jsonObject.getString("name")
                 val order = json.jsonObject.getInt("id")
+                // get types
+                val typesArray = json.jsonObject.getJSONArray("types")
+                val types = mutableListOf<String>()
+
+                for(i in 0 until typesArray.length()){
+                    val typeObject = typesArray.getJSONObject(i)
+                    val typeName = typeObject.getJSONObject("type").getString("name")
+                    types.add(typeName)
+                }
+
+                Log.d("Pokemon Types", types.toString())
 
 
                 pokeList.add(pokeImg)
                 pokeNameList.add(name)
                 pokeOrderList.add(order)
+                pokeTypeList.add(types)
 
 
 
 
 
-                val PokemonAdapter = PokeAdpater(pokeList,pokeNameList,pokeOrderList)
+                val PokemonAdapter = PokeAdpater(pokeList,pokeNameList,pokeOrderList,pokeTypeList)
                 recyclerViewPokemon.adapter = PokemonAdapter
                 PokemonAdapter.notifyDataSetChanged()
 

@@ -36,5 +36,16 @@
 
         />
 
+    <TextView
+        android:id="@+id/PokemonType"
+        android:textSize="25dp"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:text="Type: "
+        app:layout_constraintTop_toBottomOf="@id/PokemonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
